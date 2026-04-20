@@ -1,0 +1,481 @@
+.app-shell {
+  width: min(1200px, 94vw);
+  margin: 2rem auto;
+  display: grid;
+  gap: 1rem;
+  position: relative;
+  z-index: 0;
+}
+
+.app-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(82, 213, 186, 0.18), transparent 35%),
+    radial-gradient(circle at 80% 80%, rgba(24, 126, 232, 0.2), transparent 38%);
+  z-index: -2;
+}
+
+.app-shell::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(7, 24, 39, 0.5), transparent),
+    repeating-linear-gradient(
+      to right,
+      rgba(11, 35, 58, 0.35) 0,
+      rgba(11, 35, 58, 0.35) 24px,
+      rgba(19, 74, 112, 0.15) 24px,
+      rgba(19, 74, 112, 0.15) 48px
+    );
+  z-index: -1;
+}
+
+.app-shell.dark {
+  --app-bg: #061521;
+  --app-bg-secondary: #0e2438;
+  --surface: #112539;
+  --surface-strong: #173149;
+  --text-primary: #dce9f5;
+  --text-secondary: #a1c2dd;
+  --grid-line: #2e516e;
+  --card-shadow: 0 20px 45px rgba(2, 10, 18, 0.45);
+  --border: #284a66;
+}
+
+.card {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.14));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  animation: cardIn 0.55s ease both;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 48px rgba(4, 26, 45, 0.24);
+  border-color: rgba(255, 255, 255, 0.56);
+}
+
+.navbar {
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.navbar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-title h1 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.navbar-title p {
+  margin: 0;
+  color: #f0f7ff;
+  font-size: 0.9rem;
+}
+
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.selected-city-pill {
+  border: 1px solid rgba(190, 236, 255, 0.52);
+  border-radius: 999px;
+  padding: 0.42rem 0.7rem;
+  background: rgba(7, 38, 63, 0.42);
+  color: #f3fbff;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.city-chip-row {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.city-chip {
+  border: 1px solid rgba(190, 236, 255, 0.45);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  background: rgba(255, 255, 255, 0.18);
+  color: #eef9ff;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.city-chip:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.city-chip.active {
+  background: linear-gradient(120deg, rgba(15, 126, 232, 0.8), rgba(24, 185, 122, 0.8));
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.75);
+}
+
+.area-select-wrapper {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: #e6f4ff;
+}
+
+select,
+.mode-button {
+  border: 1px solid rgba(225, 245, 255, 0.54);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.34);
+  color: #0f3f68;
+  padding: 0.5rem 0.7rem;
+  font-weight: 600;
+}
+
+.app-shell.dark select,
+.app-shell.dark .mode-button {
+  background: #18324a;
+  color: #dce9f5;
+}
+
+.mode-button {
+  cursor: pointer;
+}
+
+.timestamp {
+  font-size: 0.84rem;
+  color: #e8f7ff;
+}
+
+.live-badge {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #eff8ff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(7, 34, 61, 0.55);
+  border: 1px solid rgba(189, 231, 255, 0.4);
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f23030;
+  box-shadow: 0 0 0 0 rgba(242, 48, 48, 0.6);
+  animation: pulse 1.2s infinite;
+}
+
+.alert-banner,
+.error-banner {
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+.alert-banner {
+  background: rgba(227, 179, 65, 0.23);
+  color: #fff9e2;
+}
+
+.error-banner {
+  background: rgba(229, 83, 75, 0.2);
+  color: #ffe9e8;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.dashboard-grid.switching {
+  animation: switchFade 0.35s ease;
+}
+
+.chart-card {
+  grid-column: span 8;
+  padding: 1rem;
+}
+
+.pollution-card,
+.events-card,
+.weather-card {
+  grid-column: span 4;
+  padding: 1rem;
+}
+
+.map-card {
+  grid-column: span 12;
+  padding: 1rem;
+}
+
+.weather-card {
+  display: grid;
+  align-content: start;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.card-header p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.icon {
+  color: var(--accent-blue);
+}
+
+.pollution-list,
+.events-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.pollution-item,
+.event-item {
+  border: 1px solid rgba(219, 241, 255, 0.45);
+  border-radius: 14px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.app-shell.dark .pollution-item,
+.app-shell.dark .event-item {
+  background: rgba(18, 37, 57, 0.82);
+}
+
+.pollution-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #dae8f3;
+  margin: 0.5rem 0;
+}
+
+.progress-value {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.4s ease;
+}
+
+.status-pill {
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.good {
+  background: rgba(24, 185, 122, 0.2);
+  color: #0b6f49;
+}
+
+.moderate {
+  background: rgba(227, 179, 65, 0.25);
+  color: #835f00;
+}
+
+.poor {
+  background: rgba(229, 83, 75, 0.2);
+  color: #9d2922;
+}
+
+.progress-value.good {
+  background: var(--accent-green);
+}
+
+.progress-value.moderate {
+  background: var(--accent-yellow);
+}
+
+.progress-value.poor {
+  background: var(--accent-red);
+}
+
+.event-item h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.event-item p,
+.event-item small,
+.pollution-item small {
+  margin: 0.3rem 0 0;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.weather-grid {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.weather-grid p,
+.weather-grid small {
+  margin: 0;
+}
+
+.weather-grid strong {
+  font-size: 1.8rem;
+  color: var(--accent-blue);
+}
+
+.chart-wrapper {
+  width: 100%;
+  height: 320px;
+}
+
+.pollution-chart-wrapper {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 0.8rem;
+}
+
+.city-map {
+  width: 100%;
+  height: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.loading-overlay {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(16, 42, 67, 0.9);
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(242, 48, 48, 0.6);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 12px rgba(242, 48, 48, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(242, 48, 48, 0);
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes switchFade {
+  0% {
+    opacity: 0.35;
+    transform: translateY(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1000px) {
+  .chart-card,
+  .pollution-card,
+  .events-card,
+  .weather-card,
+  .map-card {
+    grid-column: span 12;
+  }
+
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .navbar-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

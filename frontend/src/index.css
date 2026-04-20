@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --app-bg: #eaf5ff;
+  --app-bg-secondary: #daf0eb;
+  --surface: #ffffff;
+  --surface-strong: #f6fbff;
+  --text-primary: #102a43;
+  --text-secondary: #486581;
+  --accent-blue: #0f7ee8;
+  --accent-green: #18b97a;
+  --accent-yellow: #e3b341;
+  --accent-red: #e5534b;
+  --grid-line: #d9e9f6;
+  --card-shadow: 0 18px 45px rgba(9, 31, 53, 0.12);
+  --border: #d5e6f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-primary);
+  background:
+    linear-gradient(180deg, rgba(7, 37, 68, 0.35), rgba(16, 122, 95, 0.2)),
+    url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1920&q=80'),
+    radial-gradient(circle at 10% 15%, rgba(15, 126, 232, 0.2), transparent 35%),
+    radial-gradient(circle at 90% 10%, rgba(24, 185, 122, 0.2), transparent 30%),
+    linear-gradient(140deg, var(--app-bg), var(--app-bg-secondary));
+  background-size: cover, cover, auto, auto, auto;
+  background-attachment: fixed;
+  animation: ambientShift 12s ease-in-out infinite alternate;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@keyframes ambientShift {
+  0% {
+    filter: saturate(95%);
+  }
+
+  100% {
+    filter: saturate(110%);
+  }
+}
